@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leon Juma | Model and Content Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0a0a0a; --panel:#141414; --line:#2c2c2c;
+  --text:#f4f4f4; --muted:#8a8a8a; --gold:#c9a35f;
+  --display:"Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Inter",Helvetica,Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:300 1rem/1.7 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-transform:uppercase;margin:0}
+p{margin:0 0 1rem}
+.pad{padding-left:4vw;padding-right:4vw}
+section{position:relative}
+
+/* nav */
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.6rem 4vw;z-index:50;mix-blend-mode:difference;color:#fff}
+nav a{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+nav .brand{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:.1em}
+.links{display:flex;gap:2rem}
+.links a:hover{opacity:.55}
+
+/* image slots */
+.slot{position:relative;display:block;background:var(--panel);overflow:hidden;cursor:pointer;border:0;padding:0;color:var(--muted)}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;text-align:center;padding:1rem;border:1px dashed #3a3a3a;margin:12px}
+.slot .ph b{font:500 1.15rem var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--text)}
+.slot .ph span{font-size:.8rem}
+.slot.filled .ph{display:none}
+.slot:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
+.slot input{display:none}
+.slot img{transition:transform .6s cubic-bezier(.165,.84,.44,1)}
+.slot:hover img{transform:scale(1.04)}
+
+/* hero */
+.hero{height:100vh;min-height:560px;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:4vw}
+.hero .slot{position:absolute;inset:0;z-index:0}
+.hero .slot::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.85),rgba(10,10,10,0) 55%);pointer-events:none}
+.hero .slot .ph{margin:0;border:0;justify-content:flex-start;padding-top:28vh}
+.hero-text{position:relative;z-index:1;pointer-events:none}
+.hero-text .tag{font:500 1.15rem var(--display);letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.hero-text h1{font-size:clamp(3.8rem,12vw,11rem);line-height:.88;letter-spacing:-.02em;font-weight:700}
+.hero-text .loc{margin-top:1.6rem;color:var(--gold);letter-spacing:.08em}
+
+/* stats */
+.stats{padding-top:7vw;padding-bottom:7vw;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2rem;border-bottom:1px solid var(--line)}
+.stats p{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin:0 0 .2rem}
+.stats h3{font-size:1.7rem;line-height:1.15}
+
+/* about */
+.about{padding-top:8vw;padding-bottom:8vw;display:grid;grid-template-columns:5fr 6fr;gap:6vw;align-items:center;border-bottom:1px solid var(--line)}
+.about .slot{aspect-ratio:3/4}
+.about h2,.sec-title{font-size:clamp(2.4rem,5vw,3.6rem);margin-bottom:2rem}
+.about p{max-width:46ch}
+.quote{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.3rem);text-transform:uppercase;color:var(--gold);line-height:1.15;margin-top:2.2rem;max-width:20ch}
+
+/* experience */
+.exp{padding-top:8vw;padding-bottom:8vw;background:var(--panel)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:3rem}
+.cols h3{font-size:1.3rem;letter-spacing:.14em;color:var(--gold);margin-bottom:1rem}
+.cols ul{list-style:none;margin:0;padding:0}
+.cols li{padding:.8rem 0;border-top:1px solid var(--line)}
+.cols small{display:block;color:var(--muted);font-size:.8rem}
+
+/* work: asymmetric editorial grid, 3 images */
+.work{background:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2vw;align-items:start}
+.grid figure{margin:0}
+.grid figcaption{margin-top:.6rem;font:500 .85rem var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.g1{grid-column:1/6}.g1 .slot{aspect-ratio:2/3}
+.g2{grid-column:6/13;margin-top:8vw}.g2 .slot{aspect-ratio:16/10}
+.g3{grid-column:3/8;margin-top:-2vw}.g3 .slot{aspect-ratio:4/5}
+
+
+.sec{padding-top:8vw;padding-bottom:8vw;border-top:1px solid var(--line)}
+.split{display:grid;grid-template-columns:4fr 7fr;gap:6vw;align-items:start}
+.split .sec-title{margin-bottom:1.2rem}
+.split p{max-width:56ch}
+.sub{font-size:1.5rem;letter-spacing:.06em;margin:0 0 .8rem;color:var(--text)}
+.split>div>.sub:not(:first-child){margin-top:2rem}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{padding:1.1rem 0;border-top:1px solid var(--line)}
+.rows li:last-child{border-bottom:1px solid var(--line)}
+.rows b{display:block;font:500 1.15rem var(--display);letter-spacing:.06em;text-transform:uppercase}
+.rows span{display:block;color:var(--muted);margin-top:.2rem}
+.approach{margin:4rem 0 0;max-width:34ch;font:500 clamp(1.4rem,3vw,2.2rem)/1.25 var(--display);text-transform:uppercase;color:var(--gold)}
+.statement{padding-top:9vw;padding-bottom:9vw;border-top:1px solid var(--line);text-align:center}
+.statement .sub{color:var(--muted);letter-spacing:.3em;margin-bottom:1.6rem}
+.statement p{max-width:30ch;margin:0 auto;font:500 clamp(1.8rem,4.2vw,3.2rem)/1.2 var(--display);text-transform:uppercase}
+@media (max-width:768px){.split{grid-template-columns:1fr;gap:2rem}}
+
+/* contact */
+.contact{padding-top:9vw;padding-bottom:7vw;text-align:center;border-top:1px solid var(--line)}
+.contact h2{font-size:clamp(3rem,9vw,8rem);line-height:.95;margin-bottom:2.4rem;font-weight:700}
+.btn{display:inline-block;padding:1rem 3rem;border:1px solid var(--text);font:500 1.1rem var(--display);letter-spacing:.1em;text-transform:none;transition:background .3s,color .3s;overflow-wrap:anywhere}
+.btn:hover{background:var(--text);color:var(--bg)}
+.info{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 2.5rem;margin:2.6rem 0 1.4rem;color:var(--muted)}
+.info b{color:var(--text);font-weight:400}
+.avail{color:var(--gold);letter-spacing:.06em}
+footer{padding-top:1.6rem;padding-bottom:2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;text-align:center}
+
+@media (max-width:768px){
+  .links{display:none}
+  .about{grid-template-columns:1fr}
+  .grid{display:flex;flex-direction:column;gap:2rem}
+  .g2{margin-top:0}.g3{margin-top:0}
+  .g1 .slot,.g2 .slot,.g3 .slot{aspect-ratio:3/4}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.slot img{transition:none}}
+</style>
+</head>
+<body>
+<!-- Only the email and phone are still placeholders. -->
+
+<nav>
+  <a href="#top" class="brand">Leon Juma</a>
+  <div class="links">
+    <a href="#about">About</a><a href="#modelling">Modelling</a><a href="#leadership">Leadership</a><a href="#work">Work</a><a href="#collaborate">Collaborate</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero pad" id="top">
+  <label class="slot filled" tabindex="0"><img alt="Cover photo" loading="eager" referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=1h3QqlFeeWjnJu9vJr5btTegCKHp0ywuJ&sz=w1600" onerror="this.parentNode.classList.remove('filled');this.remove()"><input type="file" accept="image/*"><div class="ph"><b>Cover photo</b><span>Full-bleed landscape or tall portrait, subject lower left</span></div></label>
+  <div class="hero-text">
+    <div class="tag">Model, content creator, campus media personality</div>
+    <h1>Leon<br>Juma</h1>
+    <div class="loc">Mr University of Eldoret, based in Eldoret, Kenya</div>
+  </div>
+</section>
+
+<section class="stats pad" id="stats">
+  <div><p>Title</p><h3>Mr UOE</h3></div>
+  <div><p>Creator brand</p><h3>Legendary Killer</h3></div>
+  <div><p>Based in</p><h3>Eldoret, Kenya</h3></div>
+  <div><p>Industry</p><h3>Fashion, media</h3></div>
+  <div><p>Recognition</p><h3>Influencer of the Year 25/26</h3></div>
+</section>
+
+<section class="about pad" id="about">
+  <label class="slot filled" tabindex="0"><img alt="Portrait" loading="lazy" referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=1iT-qbM7dZho0uwx5guIBxLn4LkPxuJDL&sz=w1600" onerror="this.parentNode.classList.remove('filled');this.remove()"><input type="file" accept="image/*"><div class="ph"><b>Portrait</b><span>Relaxed, natural light</span></div></label>
+  <div>
+    <h2>About</h2>
+    <p>I am Leon Juma, known online as Legendary Killer, a Kenyan model, content creator and campus media personality working across fashion, entertainment and youth culture. I am based in Eldoret.</p>
+    <p>As Mr University of Eldoret, I stand for confidence, self-expression, leadership and the lively spirit of campus life. I bring that energy to the runway, to the camera and to my content.</p>
+    <p>My work joins modelling, leadership and digital storytelling. I am building a personal brand that speaks to young audiences and gives fashion brands, businesses, event organisers and fellow creatives a partner who understands them.</p>
+    <p>I am a versatile presence in Kenya’s campus entertainment and fashion scene, and I am ready for professional work beyond it.</p>
+    <div class="quote" style="max-width:28ch">“Confidence in every step. Identity in every frame. Legacy in every move.”</div>
+  </div>
+</section>
+
+<section class="exp pad" id="modelling">
+  <div class="split">
+    <div><h2 class="sec-title">Modelling</h2><p class="muted">I am part of the University of Eldoret modelling community and take an active role in the wider campus fashion and entertainment scene.</p></div>
+    <ul class="rows">
+      <li><b>Runway modelling</b><span>Fashion presentation with a confident walk, clean posture and a strong sense of stage.</span></li>
+      <li><b>Editorials and photoshoots</b><span>Professional shoots that tell a story through styling, expression and movement.</span></li>
+      <li><b>Promotional modelling</b><span>Brand representation that keeps a product at the centre and a personality in front of it.</span></li>
+      <li><b>Shows, pageants and events</b><span>Fashion shows, pageants and entertainment events, on stage and behind the scenes.</span></li>
+      <li><b>Personal branding</b><span>Visual storytelling that makes every appearance recognisable.</span></li>
+    </ul>
+  </div>
+  <p class="approach">My approach rests on confidence, presentation and individuality, and on communicating a brand’s identity through fashion and performance.</p>
+</section>
+
+<section class="sec pad" id="leadership">
+  <div class="split">
+    <div><h2 class="sec-title">Title and leadership</h2></div>
+    <div>
+      <h3 class="sub">Mr University of Eldoret (Mr UOE)</h3>
+      <p>I hold the title of Mr University of Eldoret, a role that sits at the centre of my public identity and modelling journey. It gives me a platform to represent the university, take part in campus entertainment activities and encourage creativity, confidence and involvement among students.</p>
+      <h3 class="sub">Modelling chairperson</h3>
+      <p>I also serve as a modelling chairperson. That means organising modelling activities, coordinating members and supporting emerging talent as they grow in the modelling community.</p>
+      <p>The role reflects my interest in teamwork, organisation, communication and the growth of Kenya’s fashion and entertainment industry.</p>
+    </div>
+  </div>
+</section>
+
+<section class="exp pad" id="creator">
+  <div class="split">
+    <div><h2 class="sec-title">Legendary Killer</h2><p class="muted">The creator identity behind my social media.</p></div>
+    <div>
+      <p>Legendary Killer is my creator brand. It brings together TikTok entertainment, memes, edits, relatable youth content and campus-related entertainment. Through it I build an engaging digital presence, connect with audiences and explore creative partnerships with businesses and brands.</p>
+      <ul class="rows">
+        <li><b>TikTok videos and entertainment</b></li>
+        <li><b>Campus lifestyle and student culture</b></li>
+        <li><b>Memes, edits and relatable content</b></li>
+        <li><b>Fashion, personal style and modelling</b></li>
+        <li><b>Brand promotions and sponsored collaborations</b></li>
+      </ul>
+      <h3 class="sub" style="margin-top:2.4rem">UOE Celebrities</h3>
+      <p>I am associated with UOE Celebrities, a campus entertainment and media platform for the University of Eldoret community. It covers outfits, campus chronicles, trending news, entertainment and business promotions.</p>
+      <p>The platform links my interests in content creation, digital communication and campus culture, and it is a natural home for collaborations with businesses, event organisers, fashion brands and student-led initiatives.</p>
+    </div>
+  </div>
+</section>
+
+<section class="work sec pad" id="work">
+  <h2 class="sec-title">Selected work</h2>
+  <div class="grid">
+    <figure class="g1"><label class="slot filled" tabindex="0"><img alt="Headshot" loading="lazy" referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=1YKC-2JKx1auiNPA3wIbDHsPA-8G298Yn&sz=w1600" onerror="this.parentNode.classList.remove('filled');this.remove()"><input type="file" accept="image/*"><div class="ph"><b>Headshot</b><span>Tall portrait, even light</span></div></label><figcaption>Headshot</figcaption></figure>
+    <figure class="g2"><label class="slot filled" tabindex="0"><img alt="Runway" loading="lazy" referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=1OckBvRLpykhSAqYQliOHdZtLRHlTipvu&sz=w1600" onerror="this.parentNode.classList.remove('filled');this.remove()"><input type="file" accept="image/*"><div class="ph"><b>Runway</b><span>Landscape, mid-stride</span></div></label><figcaption>Runway</figcaption></figure>
+    <figure class="g3"><label class="slot filled" tabindex="0"><img alt="Commercial" loading="lazy" referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=1AjWwfDRSJCDSkNgpKpyOOR-8Yvfh47Zu&sz=w1600" onerror="this.parentNode.classList.remove('filled');this.remove()"><input type="file" accept="image/*"><div class="ph"><b>Commercial</b><span>Smile, lifestyle</span></div></label><figcaption>Commercial</figcaption></figure>
+  </div>
+</section>
+
+<section class="exp pad" id="highlights">
+  <div class="split">
+    <div><h2 class="sec-title">Highlights</h2></div>
+    <ul class="rows">
+      <li><b>Mr University of Eldoret (Mr UOE)</b></li>
+      <li><b>UOE Social Media Influencer of the Year 2025/2026</b></li>
+      <li><b>Modelling chairperson</b><span>I lead modelling activities and support emerging talent.</span></li>
+      <li><b>Creator brand: Legendary Killer</b><span>Building a distinctive identity across social media.</span></li>
+      <li><b>Associated with UOE Celebrities</b><span>Campus media, entertainment and brand promotions.</span></li>
+      <li><b>Fashion modelling, digital entertainment and brand collaborations</b><span>Where I am focused and growing.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec pad" id="collaborate">
+  <div class="split">
+    <div><h2 class="sec-title">Collaborate</h2><p class="muted">I am open to professional work with brands that value creativity, authenticity, professionalism and real engagement with young audiences.</p></div>
+    <ul class="rows">
+      <li><b>Fashion and clothing brands</b></li>
+      <li><b>Modelling agencies and fashion designers</b></li>
+      <li><b>Commercial photoshoots and runway events</b></li>
+      <li><b>Product promotions and influencer campaigns</b></li>
+      <li><b>Campus events and entertainment projects</b></li>
+      <li><b>Social media partnerships and sponsored content</b></li>
+    </ul>
+  </div>
+</section>
+
+<section class="statement pad">
+  <h2 class="sub">Professional objective</h2>
+  <p>To grow as a recognised model and digital creator by combining fashion, leadership and storytelling, and to build lasting partnerships with brands, creatives and organisations. I aim to use my platform to represent youth culture, develop my modelling career and open doors in Kenya’s fashion and entertainment industries.</p>
+</section>
+
+<section class="contact pad" id="contact">
+  <h2>Let’s work<br>together</h2>
+  <a class="btn" href="mailto:">leonjuma2004@gmail.com</a>
+  <div class="info">
+    <span>TikTok <b>@l3g3ndaryk8ll3r_3</b></span>
+    <span>Instagram <b>@legendary_kill3r</b></span>
+    <span>Phone <b>+254721918056</b></span>
+    <span>Based in <b>Eldoret, Kenya</b></span>
+  </div>
+  <div class="avail">Open to brand collaborations and bookings.</div>
+</section>
+
+<footer class="pad">Leon Juma (Legendary Killer), Model portfolio</footer>
+
+<script>
+document.querySelectorAll('.slot').forEach(function(slot){
+  var input=slot.querySelector('input');
+  slot.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();input.click();}});
+  input.addEventListener('change',function(){
+    var f=input.files&&input.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      var img=slot.querySelector('img');
+      if(!img){img=document.createElement('img');img.alt='';slot.appendChild(img);}
+      img.src=r.result;slot.classList.add('filled');
+    };
+    r.readAsDataURL(f);
+  });
+});
+</script>
+</body>
+</html>
